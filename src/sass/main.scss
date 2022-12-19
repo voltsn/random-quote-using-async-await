@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,400&display=swap');
+
+// Reset rules
+html{
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+button{
+    font: inherit;
+}
+
+// General rules
+body{
+    background-image: linear-gradient(348.07deg, #F9CE34 1.21%, 
+                        #ee2a7b 51.64%,
+                        #6228d7 100%);
+    color: #fff;
+    font-family: "poppins", sans-serif;
+}
+
+
+// Main section
+.main-section{
+    display: flex;
+    flex-direction: column;
+    gap: 9.25rem;
+    align-items: center;
+    height: 100vh;
+    width: 94%;
+    max-width: 90rem;
+    margin: 0 auto;
+
+    .main-heading{
+        font-size: clamp(1.75rem, 1.662rem + 0.3756vw, 2rem);
+        padding-top: 5.5rem;
+    }
+
+    .quote-block-container{
+        width: 80%;
+        max-width: 28rem;
+        display: none;
+    }
+
+    .quote-block{
+        position: relative;
+        .quote-block__quote{
+            font-style: italic;
+            font-size: clamp(1.125rem, 1.037rem + 0.3756vw, 1.375rem);
+            &::before{
+                content: "\"";
+            }
+
+            &::after{
+                content: "\"";
+            }
+        }
+    }
+    .quote-block-container__quote-source{
+        font-size: clamp(0.9rem, 0.618rem + 0.5634vw, 1.125rem);
+        text-align: right;
+        margin-top: 2.6875rem;
+    }
+}
+
+.error-message{
+    display: none;
+    font-size: 1.5625rem;
+    max-width: 19.625rem;
+}
+
+.main-btn{
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    background-color: transparent;
+    background-image: linear-gradient(107.85deg,
+                rgba(255, 255, 255, 0.34) 12.18%, 
+                rgba(255, 255, 255, 0.2) 99.69%);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin-bottom: 4.5rem;
+    padding: 1em 2.6em;
+    visibility: hidden;
+
+    &:hover{
+        border-color: #6228d7;
+    }
+}
+
