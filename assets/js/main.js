@@ -19,9 +19,13 @@ newQuoteBtn.addEventListener("click", () => {
 })
 
 async function getQuote(){
-    const response = await fetch("https://thatsthespir.it/api");
-    const data = await response.json();
-    displayQuote(formatQuote(data))
+    const quoteResponse = await fetch("https://thatsthespir.it/api");
+    const quoteData = await quoteResponse.json();
+
+    const agifyResponse = await fetch(`https://api.agify.io?name=${quoteData.author.split(" ")[0]}`)
+    const agifyData = await agifyResponse.json();
+
+    displayQuote(formatQuote(quoteData, agifyData.age))
     setTimeout(()=>{
         document.querySelector(".quote-block-container").classList.add("slide-in");
     },500);
@@ -31,7 +35,7 @@ const displayQuote = (quote) => {
     container.innerHTML = quote;
 }  
 
-const formatQuote = (data) => {
+const formatQuote = (data, age) => {
     return `
         <figure class="quote-block-container">
             <blockquote class="quote-block" cite="${data.permalink}">
@@ -40,7 +44,7 @@ const formatQuote = (data) => {
                 </p>
             </blockquote>
             <figcaption class="quote-block-container__quote-source">
-                <p>— <span>${data.author}</span></p>
+                <p>— <span>${data.author}</span>, ${age}</p>
                 <div class="author-photo">
                     <img src="${data.photo}" alt="${data.author}">
                 </div>
