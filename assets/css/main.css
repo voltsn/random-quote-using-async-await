@@ -37,30 +37,42 @@ img {
   max-width: 90rem;
   margin: 0 auto;
   display: grid;
+  gap: 1.5rem;
 }
 .main-section .main-heading {
   font-size: clamp(1.75rem, 1.662rem + 0.3756vw, 2rem);
   margin-top: 3rem;
   text-align: center;
 }
-.main-section .quote-block-container {
+
+.quote-block-container {
   width: 80%;
-  max-width: 28rem;
+  max-width: 30rem;
+  transform: translateX(1000%);
+  transition: transform 500ms ease-in-out;
 }
-.main-section .quote-block {
+.quote-block-container.slide-out {
+  transform: translateX(-1000%);
+}
+.quote-block-container.slide-in {
+  transform: translateX(0);
+}
+
+.quote-block {
   position: relative;
 }
-.main-section .quote-block .quote-block__quote {
+.quote-block .quote-block__quote {
   font-style: italic;
   font-size: clamp(1.125rem, 1.037rem + 0.3756vw, 1.375rem);
 }
-.main-section .quote-block .quote-block__quote::before {
+.quote-block .quote-block__quote::before {
   content: '"';
 }
-.main-section .quote-block .quote-block__quote::after {
+.quote-block .quote-block__quote::after {
   content: '"';
 }
-.main-section .quote-block-container__quote-source {
+
+.quote-block-container__quote-source {
   font-size: clamp(0.9rem, 0.618rem + 0.5634vw, 1.125rem);
   text-align: right;
   margin-top: 2.6875rem;
@@ -69,13 +81,13 @@ img {
   gap: 1.2em;
   justify-content: end;
 }
-.main-section .quote-block-container__quote-source .author-photo {
+.quote-block-container__quote-source .author-photo {
   border-radius: 50%;
   width: 6.25rem;
   height: 6.25rem;
   overflow: hidden;
 }
-.main-section .quote-block-container__quote-source .author-photo img {
+.quote-block-container__quote-source .author-photo img {
   object-fit: cover;
   height: 100%;
 }
@@ -94,7 +106,6 @@ img {
   cursor: pointer;
   font-size: 1.2rem;
   padding: 0.5em 1.6em;
-  display: inline-block;
 }
 .main-btn:hover {
   opacity: 0.8;

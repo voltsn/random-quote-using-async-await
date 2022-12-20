@@ -42,6 +42,7 @@ img{
     max-width: 90rem;
     margin: 0 auto;
     display: grid;
+    gap: 1.5rem;
 
     .main-heading{
         font-size: clamp(1.75rem, 1.662rem + 0.3756vw, 2rem);
@@ -49,44 +50,57 @@ img{
         text-align: center;
     }
 
-    .quote-block-container{
-        width: 80%;
-        max-width: 28rem;
+}
+
+.quote-block-container{
+    width: 80%;
+    max-width: 30rem;
+    transform: translateX(1000%);
+    transition: transform 500ms ease-in-out;
+
+    &.slide-out {
+        transform: translateX(-1000%);
     }
+    
+    &.slide-in{
+        transform: translateX(0);
+    }
+}
 
-    .quote-block{
-        position: relative;
-        .quote-block__quote{
-            font-style: italic;
-            font-size: clamp(1.125rem, 1.037rem + 0.3756vw, 1.375rem);
-            &::before{
-                content: "\"";
-            }
+.quote-block{
+    position: relative;
+    .quote-block__quote{
+        font-style: italic;
+        font-size: clamp(1.125rem, 1.037rem + 0.3756vw, 1.375rem);
+        &::before{
+            content: "\"";
+        }
 
-            &::after{
-                content: "\"";
-            }
+        &::after{
+            content: "\"";
         }
     }
-    .quote-block-container__quote-source{
-        font-size: clamp(0.9rem, 0.618rem + 0.5634vw, 1.125rem);
-        text-align: right;
-        margin-top: 2.6875rem;
-        display: flex;
-        align-items: center;
-        gap: 1.2em;
-        justify-content: end;
+}
 
-        .author-photo{
-            border-radius: 50%;
-            width: 6.25rem;
-            height: 6.25rem;
-            overflow: hidden;
 
-            img{
-                object-fit: cover;
-                height: 100%;
-            }
+.quote-block-container__quote-source{
+    font-size: clamp(0.9rem, 0.618rem + 0.5634vw, 1.125rem);
+    text-align: right;
+    margin-top: 2.6875rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+    justify-content: end;
+
+    .author-photo{
+        border-radius: 50%;
+        width: 6.25rem;
+        height: 6.25rem;
+        overflow: hidden;
+
+        img{
+            object-fit: cover;
+            height: 100%;
         }
     }
 }
@@ -105,7 +119,6 @@ img{
     cursor: pointer;
     font-size: 1.2rem;
     padding: .5em 1.6em;
-    display: inline-block;
 
     &:hover{
         opacity: 0.8;

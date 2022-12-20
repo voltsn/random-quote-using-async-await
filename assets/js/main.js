@@ -9,15 +9,22 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 newQuoteBtn.addEventListener("click", () => {
-    getQuote().catch(() => {
-        container.innerHTML = errorMessage();
-    });
+    document.querySelector(".quote-block-container").classList.remove("slide-in");
+    document.querySelector(".quote-block-container").classList.add("slide-out");
+    setTimeout(()=>{
+        getQuote().catch(() => {
+            container.innerHTML = errorMessage();
+        });
+    },500);
 })
 
 async function getQuote(){
     const response = await fetch("https://thatsthespir.it/api");
     const data = await response.json();
     displayQuote(formatQuote(data))
+    setTimeout(()=>{
+        document.querySelector(".quote-block-container").classList.add("slide-in");
+    },500);
 }
 
 const displayQuote = (quote) => {
