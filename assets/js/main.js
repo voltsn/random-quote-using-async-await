@@ -19,6 +19,7 @@ newQuoteBtn.addEventListener("click", () => {
 })
 
 async function getQuote(){
+    // Display loading animation
     newQuoteBtn.innerHTML = '<span class="spinner"></span>';
     const quoteResponse = await fetch("https://thatsthespir.it/api");
     const quoteData = await quoteResponse.json();
@@ -29,6 +30,8 @@ async function getQuote(){
     displayQuote(formatQuote(quoteData, agifyData.age))
     setTimeout(()=>{
         document.querySelector(".quote-block-container").classList.add("slide-in");
+        
+        // display regular button content
         newQuoteBtn.innerHTML = 'Generate Quote';
     },500);
 }
@@ -38,21 +41,45 @@ const displayQuote = (quote) => {
 }  
 
 const formatQuote = (data, age) => {
-    return `
-        <figure class="quote-block-container">
-            <blockquote class="quote-block" cite="${data.permalink}">
-                <p class="quote-block__quote">
-                    ${data.quote}.
-                </p>
-            </blockquote>
-            <figcaption class="quote-block-container__quote-source">
-                <p>— <span>${data.author}</span>, ${age}</p>
-                <div class="author-photo">
-                    <img src="${data.photo}" alt="${data.author}">
-                </div>
-            </figcaption>
-        </figure>
-    `
+    const figure = document.createElement("figure");
+    figure.classList.add("quote-block-container");
+    
+    const blockquote = document.createElement("blockquote");
+    blockquote.classList.add("quote-block");
+    blockquote.setAttribute("cite", data.permalink);
+
+    const quote = document.createElement("p");
+    quote.classList.add("quote-block__quote");
+    quote.appendChild(document.createTextNode(data.quote));
+
+    const figcaption = document.createElement("figcaption");
+    figcaption.classList.add("quote-block-container__quote-source");
+     
+    const author = document.createElement("p");
+    autor.appendChild(document.createTextNode(`— ${data.author}, ${age}`));
+    
+    
+    let photoContainer;
+    let authorPhoto;
+    if (data.photo !== ""){
+      photoContainer = document.createElement("div");
+      photoContainer.classList.add("author-photo");
+      
+      authorPhoto = document.createElement("img");
+      authorPhoto.src = data.photo;
+      authorPhoto.alt = data.author; 
+      photoContainer.appendChild(authorPhoto);
+    }
+    
+    blockquote.appendChild(quote);
+    figcaption.appendchild(author);
+    if (photoContainer !== undefined){
+      figcaption.appendChild(photoContainer);
+    }
+    figure.appendChild(blockquote);
+    figure.appendChild(figcaption);
+    
+    return figure;
 }
 
 const errorMessage = () => {
