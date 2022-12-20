@@ -4,26 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/main.css">
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js" defer></script>
   <title>Random Quote</title>
 </head>
 <body>
  <main>
   <section class="main-section">
     <h1 class="main-heading">Random Quote</h1>
-    <figure class="quote-block-container">
-      <blockquote class="quote-block">
-        <p class="quote-block__quote">
-          Two things are infinite: the universe and human stupidity;
-          and I'm not sure about the universe.
-        </p>
-      </blockquote>
-      <figcaption class="quote-block-container__quote-source">— <span>Alber Einstein</span></figcaption>
-    </figure>
-    <div class="error-message">
-      Something Went wrong please try again later 🙁
+    <div class="container" id="container">
     </div>
-    <button class="main-btn" id="new-quote-btn">Generate Another Quote</button>
+    <div class="container">
+      <button class="main-btn" id="new-quote-btn">Generate Quote</button>
+    </div>
   </section>
  </main>
 </body>
