@@ -19,6 +19,7 @@ newQuoteBtn.addEventListener("click", () => {
 })
 
 async function getQuote(){
+    newQuoteBtn.innerHTML = '<span class="spinner"></span>';
     const quoteResponse = await fetch("https://thatsthespir.it/api");
     const quoteData = await quoteResponse.json();
 
@@ -28,6 +29,7 @@ async function getQuote(){
     displayQuote(formatQuote(quoteData, agifyData.age))
     setTimeout(()=>{
         document.querySelector(".quote-block-container").classList.add("slide-in");
+        newQuoteBtn.innerHTML = 'Generate Quote';
     },500);
 }
 

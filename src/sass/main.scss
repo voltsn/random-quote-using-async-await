@@ -34,6 +34,31 @@ img{
     align-items: center;
 }
 
+.spinner::after{
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(.2,1.06,1,.13);
+    animation-iteration-count: infinite;
+    content: " ";
+    display: inline-block;
+    border-radius: 50%;
+    border:2px solid #cfd0d1;
+    border-bottom-color: #1c87c9;
+    width: 1em;
+    height: 1em;
+    z-index: 2;
+  }
+  
+  @keyframes spin {
+    0%{
+      transform: rotate(0);
+    }
+  
+    100%{
+      transform: rotate(360deg);
+    }
+  }
+
 
 // Main section
 .main-section{
@@ -41,7 +66,9 @@ img{
     width: 94%;
     max-width: 90rem;
     margin: 0 auto;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     gap: 1.5rem;
     overflow: hidden;
 
@@ -83,7 +110,6 @@ img{
     }
 }
 
-
 .quote-block-container__quote-source{
     font-size: clamp(0.9rem, 0.618rem + 0.5634vw, 1.125rem);
     text-align: right;
@@ -121,9 +147,10 @@ img{
     font-size: 1.2rem;
     padding: .5em 1.6em;
     margin-bottom: 1rem;
+    min-width: 12.75rem;
+    text-align: center;
 
     &:hover{
         opacity: 0.8;
     }
 }
-
