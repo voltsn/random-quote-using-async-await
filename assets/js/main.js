@@ -3,8 +3,9 @@ const newQuoteBtn = document.querySelector("#new-quote-btn");
 const container = document.querySelector("#container");
 
 window.addEventListener("DOMContentLoaded", () => {
-    getQuote().catch(() => {
+    getQuote().catch((error) => {
         container.innerHTML = errorMessage();
+        console.error(error);
     });
 });
 
@@ -14,6 +15,7 @@ newQuoteBtn.addEventListener("click", () => {
     setTimeout(()=>{
         getQuote().catch(() => {
             container.innerHTML = errorMessage();
+            console.error(error);
         });
     },500);
 })
@@ -23,24 +25,28 @@ async function getQuote(){
     newQuoteBtn.innerHTML = '<span class="spinner"></span>';
     const quoteResponse = await fetch("https://thatsthespir.it/api");
     const quoteData = await quoteResponse.json();
+    console.log(quoteData);
 
-    const agifyResponse = await fetch(`https://api.agify.io?name=${quoteData.author.split(" ")[0]}`)
-    const agifyData = await agifyResponse.json();
+   // const agifyResponse = await fetch(`https://api.agify.io?name=${quoteData.author.split(" ")[0]}`)
+    // const agifyData = await agifyResponse.json();
 
-    displayQuote(formatQuote(quoteData, agifyData.age))
+    displayQuote(formatQuote(quoteData));
+    // console.log("about");
     setTimeout(()=>{
         document.querySelector(".quote-block-container").classList.add("slide-in");
-        
         // display regular button content
         newQuoteBtn.innerHTML = 'Generate Quote';
     },500);
 }
 
 const displayQuote = (quote) => {
-    container.innerHTML = quote;
+    if (container.children.length != 0){
+        container.removeChild(container.children[0]);
+    }
+    container.appendChild(quote);
 }  
 
-const formatQuote = (data, age) => {
+const formatQuote = (data) => {
     const figure = document.createElement("figure");
     figure.classList.add("quote-block-container");
     
@@ -56,7 +62,7 @@ const formatQuote = (data, age) => {
     figcaption.classList.add("quote-block-container__quote-source");
      
     const author = document.createElement("p");
-    autor.appendChild(document.createTextNode(`— ${data.author}, ${age}`));
+    author.appendChild(document.createTextNode(`— ${data.author}`));
     
     
     let photoContainer;
@@ -72,7 +78,7 @@ const formatQuote = (data, age) => {
     }
     
     blockquote.appendChild(quote);
-    figcaption.appendchild(author);
+    figcaption.appendChild(author);
     if (photoContainer !== undefined){
       figcaption.appendChild(photoContainer);
     }
